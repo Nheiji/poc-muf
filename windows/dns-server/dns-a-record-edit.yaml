@@ -1,0 +1,13 @@
+---
+- name: Edit A record on Windows DNS Server
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Ensure A record exists or is updated
+      community.windows.win_dns_record:
+        zone: "{{ base_domain }}"
+        name: "{{ sub_domain }}"
+        type: "A"
+        value: "{{ ip_address }}"
+        state: present
+        ttl: 3600
